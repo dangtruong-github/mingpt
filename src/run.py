@@ -185,7 +185,7 @@ elif args.function == 'finetune':
     else:
         print("IS PRETRAIN")
         tconf = trainer.TrainerConfig(
-            max_epochs=5,
+            max_epochs=5, #10,
             batch_size=256,
             learning_rate=args.finetune_lr,
             lr_decay=True,
