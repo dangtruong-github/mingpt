@@ -161,17 +161,32 @@ elif args.function == 'finetune':
     #     number of epochs for each case.
 
     ### YOUR CODE HERE ###
-    tconf = trainer.TrainerConfig(
-        max_epochs=75,
-        batch_size=256,
-        learning_rate=args.finetune_lr,
-        lr_decay=True,
-        warmup_tokens=512*20,
-        final_tokens=200*len(pretrain_dataset)*block_size,
-        num_workers=4,
-        writer=writer,
-        ckpt_path=args.writing_params_path
-    )
+    if args.reading_params_path is None:
+        print("IS NOT PRETRAIN")
+        tconf = trainer.TrainerConfig(
+            max_epochs=75,
+            batch_size=256,
+            learning_rate=args.finetune_lr,
+            lr_decay=True,
+            warmup_tokens=512*20,
+            final_tokens=200*len(pretrain_dataset)*block_size,
+            num_workers=4,
+            writer=writer,
+            ckpt_path=args.writing_params_path
+        )
+    else:
+        print("IS PRETRAIN")
+        tconf = trainer.TrainerConfig(
+            max_epochs=10,
+            batch_size=256,
+            learning_rate=args.finetune_lr,
+            lr_decay=True,
+            warmup_tokens=512*20,
+            final_tokens=200*len(pretrain_dataset)*block_size,
+            num_workers=4,
+            writer=writer,
+            ckpt_path=args.writing_params_path
+        )
     train_dataset = dataset.NameDataset(
         pretraining_dataset=pretrain_dataset,
         data=open(args.finetune_corpus_path, encoding='utf-8').read()
