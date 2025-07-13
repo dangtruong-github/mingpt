@@ -3,8 +3,13 @@
 # Note: Don't forget to edit the hyper-parameters for part d.
 
 # Pretrain the model
-python src/run.py pretrain rope wiki.txt \
+if [[ "$1" == "pretrain" ]]; then
+    echo "Running pretraining step..."
+    python src/run.py pretrain rope wiki.txt \
         --writing_params_path rope.pretrain.params
+else
+    echo "No pretraining argument provided. Skipping."
+fi
         
 # Finetune the model
 python src/run.py finetune rope wiki.txt \

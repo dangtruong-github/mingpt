@@ -1,8 +1,14 @@
 #!/bin/bash
 
 # Pretrain the model
-python src/run.py pretrain vanilla wiki.txt \
+# Check if "pretrain" was passed as an argument
+if [[ "$1" == "pretrain" ]]; then
+    echo "Running pretraining step..."
+    python src/run.py pretrain vanilla wiki.txt \
         --writing_params_path vanilla.pretrain.params
+else
+    echo "No pretraining argument provided. Skipping."
+fi
         
 # Finetune the model
 python src/run.py finetune vanilla wiki.txt \
