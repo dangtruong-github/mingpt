@@ -74,6 +74,9 @@ if args.variant == 'vanilla':
     # TODO: [part c] Make some model here
     ### YOUR CODE HERE ###
     model = models.GPT(mconf).to(device)
+    if args.reading_params_path is not None:
+        model.load_state_dict(torch.load(args.reading_params_path,
+                                         map_location=device))
     ### END YOUR CODE ###
 elif args.variant == 'rope':
     # TODO: [part g] Make some other model here
@@ -81,6 +84,9 @@ elif args.variant == 'rope':
     ### YOUR CODE HERE ###
     mconf.rope = True
     model = models.GPT(mconf).to(device)
+    if args.reading_params_path is not None:
+        model.load_state_dict(torch.load(args.reading_params_path,
+                                         map_location=device))
     ### END YOUR CODE ###
 else:
     raise ValueError("Unknown model variant")
