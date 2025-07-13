@@ -76,9 +76,11 @@ if args.variant == 'vanilla':
     model = models.GPT(mconf).to(device)
     if args.reading_params_path is not None:
         print(f"LOADING MODEL FROM CKPT: {args.reading_params_path}")
-        print(f"LOADING MODEL TO DEVICE: {device}")
-        model.load_state_dict(torch.load(args.reading_params_path,
-                                         map_location=device))
+        print(f"LOADING MODEL TO DEVICE: {next(model.parameters()).device}")
+        model.load_state_dict(torch.load(
+            args.reading_params_path,
+            map_location=next(model.parameters()).device
+        ))
     ### END YOUR CODE ###
 elif args.variant == 'rope':
     # TODO: [part g] Make some other model here
@@ -88,9 +90,11 @@ elif args.variant == 'rope':
     model = models.GPT(mconf).to(device)
     if args.reading_params_path is not None:
         print(f"LOADING MODEL FROM CKPT: {args.reading_params_path}")
-        print(f"LOADING MODEL TO DEVICE: {device}")
-        model.load_state_dict(torch.load(args.reading_params_path,
-                                         map_location=device))
+        print(f"LOADING MODEL TO DEVICE: {next(model.parameters()).device}")
+        model.load_state_dict(torch.load(
+            args.reading_params_path,
+            map_location=next(model.parameters()).device
+        ))
     ### END YOUR CODE ###
 else:
     raise ValueError("Unknown model variant")
