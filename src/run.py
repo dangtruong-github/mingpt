@@ -75,6 +75,7 @@ if args.variant == 'vanilla':
     ### YOUR CODE HERE ###
     model = models.GPT(mconf).to(device)
     if args.reading_params_path is not None:
+        print(f"LOADING MODEL FROM CKPT: {args.reading_params_path}")
         model.load_state_dict(torch.load(args.reading_params_path,
                                          map_location=device))
     ### END YOUR CODE ###
@@ -85,6 +86,7 @@ elif args.variant == 'rope':
     mconf.rope = True
     model = models.GPT(mconf).to(device)
     if args.reading_params_path is not None:
+        print(f"LOADING MODEL FROM CKPT: {args.reading_params_path}")
         model.load_state_dict(torch.load(args.reading_params_path,
                                          map_location=device))
     ### END YOUR CODE ###
