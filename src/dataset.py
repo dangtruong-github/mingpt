@@ -106,7 +106,10 @@ class CharCorruptionDataset(Dataset):
         chunk = self.data[idx][:new_length]
 
         length_masked = int(random.gauss(new_length // 4, 1))
-        start_masked_idx = random.randint(1, new_length-length_masked-1)
+        try:
+            start_masked_idx = random.randint(1, new_length-length_masked-1)
+        except:
+            start_masked_idx = 1
 
         prefix = chunk[:start_masked_idx]
         masked_content = chunk[start_masked_idx:start_masked_idx+length_masked]
