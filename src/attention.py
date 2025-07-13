@@ -139,7 +139,7 @@ class CausalSelfAttention(nn.Module):
         if self.rope:
             # TODO: [part g] Apply RoPE to the query and key.
             ### YOUR CODE HERE ###
-            print(f"BTC: {B}, {T}, {C}")
+            # print(f"BTC: {B}, {T}, {C}")
             k = apply_rotary_emb(k, rope_cache=self.rope_cache)
             q = apply_rotary_emb(q, rope_cache=self.rope_cache)
             ### END YOUR CODE ###
